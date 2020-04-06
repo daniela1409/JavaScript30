@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>FRIENDS</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body">
+	<embed src="tunes/smelly.mp3" hidden="true" loop="true" volume="300" width="0" height="0">
+	<div class="keys">
+		
+		<div data-key="82" class="key">
+			<span class="sound"><img class= "img"src="images/rachel.jpg"></span>
+			<kbd>R</kbd>
+		</div>
+		<div data-key="68" class="key">
+			<span class="sound"><img class= "img"src="images/ross.jpg"></span>
+			<kbd>D</kbd>
+		</div>
+		<div data-key="77" class="key">
+			<span class="sound"><img class= "img"src="images/monica.jpg"></span>
+			<kbd>M</kbd>
+		</div>
+		<div data-key="67" class="key">
+			<span class="sound"><img class= "img"src="images/chandler.jpg"></span>
+			<kbd>C</kbd>
+		</div>
+		<div data-key="80" class="key">
+			<span class="sound"><img class= "img"src="images/phoebe.jpg"></span>
+			<kbd>P</kbd>
+		</div>
+		<div data-key="74" class="key">
+			<span class="sound"><img class= "img"src="images/joey.jpg"></span>
+			<kbd>J</kbd>
+		</div>
+		
+	</div>
+
+	<audio data-key="82" src="tunes/nop.mp3" type="audio/mpeg"></audio>
+
+	<audio data-key="68" src="tunes/unagi.mp3"></audio>
+	<audio data-key="77" src="tunes/seven.mp3"></audio>
+	<audio data-key="67" src="tunes/woopah.mp3"></audio>
+	<audio data-key="80" src="tunes/smelly.mp3"></audio>
+	<audio data-key="74" src="tunes/how.mp3"></audio>
+
+<script>
+	
+
+	function playSound(e){
+	    const audio= document.querySelector(`audio[data-key="${e.keyCode}"]`);
+	    const key= document.querySelector(`.key[data-key="${e.keyCode}"]`);
+	    if (!audio) return; //parar si no se encuentra la teclas
+	    audio.currentTime = 0; //parar la funcion y no suenen varias juntas
+	    audio.play();
+        key.classList.add('playing');
+	}
+
+	function removeTransition(e){
+		
+		if(e.propertyName !== 'transform')return;
+		
+		this.classList.remove('playing')
+	}
+
+	const keys = document.querySelectorAll('.key');
+	keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+	window.addEventListener('keydown', playSound);
+	
+</script>
+</embed>
+</body>
+</html>
