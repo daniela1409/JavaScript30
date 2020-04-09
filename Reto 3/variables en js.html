@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dancer in the dark</title>
+</head>
+<body>
+	<h2>Dancer in the dark<span class='h1'></span></h2>
+	<div class="controls">
+		<label for="spacing">Spacing:</label>
+		<input type="range" name="spacing" min="10"
+		max="50"
+		value="10" data-sizing="px">
+
+		<!--data-sizing, variable creada que será tomadada desde el java script-->
+
+		<label for="blur">Blur:</label>
+		<input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+		<label for="base">Base Color</label>
+		<input type="color" name="base" value="#ffc600">
+	</div>
+
+	<img src="images/dancer3.jpg">
+</body>
+
+<style type="text/css">
+	:root{
+		--base:#ffc600;
+		--spacing:10px;
+		--blur:10px;
+	}
+
+	img{
+		padding: var(--spacing);
+		background: var(--base);
+		filter: blur(var(--blur));
+		top:28%;
+		left: 37%;
+		position: absolute;
+		width: 25%;
+		height: 38%;
+	}
+
+	.h1{
+		color: var(--base);
+	}
+
+
+	body{
+		background: #193549;
+		background-image: url(images/background.jpg);
+		background-size: 100%;
+		color: #fcd1c6;
+		font-family: "Times New Roman", Times, cursive;
+		font-weight: 100;
+		font-size: 50px;
+	}
+	body{
+		text-align: center;
+	}
+
+	.controls{ 
+		position: absolute;
+		top: 14%;
+		left:20%;
+
+	 }
+
+	h2{
+		position: absolute;
+		top: -11%;
+		left:30%;
+		color: #2d567a;
+	}
+</style>
+
+<script type="text/javascript">
+	const inputs = document.querySelectorAll(`.controls input`);
+
+	function handleUpdate(){
+		const suffix = this.dataset.sizing || '';
+		document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+	}
+
+	inputs.forEach(input => input.addEventListener('change', handleUpdate));
+	inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+
+</script>
+
+</html>
